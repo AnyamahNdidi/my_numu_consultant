@@ -1,0 +1,18 @@
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  
+  .menu {
+    position: fixed;
+    background-color: #0A0A0A;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
