@@ -9,17 +9,18 @@ export default function Info() {
   let x = 0.5;
   let time = Math.PI / 2;
   let reqId = null;
-
-  useEffect(() => {
-    setPath(progress);
-  }, [progress, setPath])
-
-  const setPath = (progress) => {
+  
+const setPath = (progress) => {
     if (!path.current) return;
     const width = window.innerWidth * 0.7;
     path.current.setAttributeNS(null, "d", `M0 250 Q${width * x} ${250 + progress}, ${width} 250`)
   }
 
+  useEffect(() => {
+    setPath(progress);
+  }, [progress, setPath])
+
+  
   const lerp = (x, y, a) => x * (1 - a) + y * a
 
   const manageMouseEnter = () => {
