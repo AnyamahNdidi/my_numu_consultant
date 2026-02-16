@@ -12,7 +12,7 @@ export default function Info() {
 
   useEffect(() => {
     setPath(progress);
-  }, [])
+  }, [progress, setPath])
 
   const setPath = (progress) => {
     if (!path.current) return;

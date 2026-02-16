@@ -55,10 +55,10 @@ export default function Home() {
       // Cleanup Lenis
       lenis.destroy();
     };
-  }, []);
+  }, [articles]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Or a loading spinner
+    return <div>Loading....</div>; // Or a loading spinner
   }
 
   return (

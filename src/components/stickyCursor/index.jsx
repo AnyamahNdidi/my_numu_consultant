@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import styles from './style.module.scss';
 import { motion, useMotionValue, useSpring, transform, animate } from 'framer-motion';
 
@@ -31,7 +31,9 @@ export default function StickyCursor({stickyElement}) {
     animate(cursor.current, { rotate: `${angle}rad` }, {duration: 0})
   }
 
-  const manageMouseMove = e => {
+  const manageMouseMove = useCallback((e) => {
+    if (!stickyElement?.current) return;
+    
     const { clientX, clientY } = e;
     const { left, top, height, width } = stickyElement.current.getBoundingClientRect();
 
@@ -39,8 +41,7 @@ export default function StickyCursor({stickyElement}) {
     const center = {x: left + width / 2, y: top + height / 2}
 
     if(isHovered){
-
-      //distance between the mouse pointer and the center of the custom cursor and 
+      //distance between the mouse pointer and the center of the custom cursor
       const distance = {x: clientX - center.x, y: clientY - center.y}
       
       //rotate
@@ -56,17 +57,16 @@ export default function StickyCursor({stickyElement}) {
       //move mouse to center of stickyElement + slightly move it towards the mouse pointer
       mouse.x.set((center.x - cursorSize / 2) + (distance.x * 0.1));
       mouse.y.set((center.y - cursorSize / 2) + (distance.y * 0.1));
-    }
-    else{
+    } else {
       //move custom cursor to center of stickyElement
       mouse.x.set(clientX - cursorSize / 2);
       mouse.y.set(clientY - cursorSize / 2);
     }
-  }
+  }, [isHovered, cursorSize, mouse.x, mouse.y, scale.x, scale.y]);
 
-  const manageMouseOver = e => {
-    setIsHovered(true)
-  }
+  const manageMouseOver = useCallback(() => {
+    setIsHovered(true);
+  }, []);
 
   const manageMouseLeave = e => {
     setIsHovered(false)
@@ -88,7 +88,7 @@ export default function StickyCursor({stickyElement}) {
       }
       window.removeEventListener("mousemove", manageMouseMove);
     };
-  }, [isHovered, stickyElement, manageMouseMove, manageMouseOver]);
+  }, [stickyElement, manageMouseMove, manageMouseOver]);
 
   const template = ({rotate, scaleX, scaleY}) => {
     return `rotate(${rotate}) scaleX(${scaleX}) scaleY(${scaleY})` 
