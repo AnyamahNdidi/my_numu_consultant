@@ -60,7 +60,7 @@ export default async function ArticlesPage() {
         </section>
 
         {/* Newsletter CTA – you can also move this to a client component if you want animations */}
-        <section className="py-20 px-6 md:px-12 lg:px-16 bg-[#0F0F0F]">
+        {/* <section className="py-20 px-6 md:px-12 lg:px-16 bg-[#0F0F0F]">
           <div className="max-w-4xl mx-auto text-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -83,7 +83,7 @@ export default async function ArticlesPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
 
       <Footer />
