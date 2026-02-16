@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Logo } from "./logo";

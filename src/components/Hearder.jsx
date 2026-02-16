@@ -29,6 +29,16 @@ export default function Header() {
       //   { label: "Careers", href: "/about/careers" },
       // ]
     },
+    { 
+      label: "Articles", 
+      hasDropdown: false,
+      href: "/articles",
+      // dropdownItems: [
+      //   { label: "Our Story", href: "/about/our-story" },
+      //   { label: "Team", href: "/about/team" },
+      //   { label: "Careers", href: "/about/careers" },
+      // ]
+    },
     // { 
     //   label: "Porfolio", 
     //   hasDropdown: true,
