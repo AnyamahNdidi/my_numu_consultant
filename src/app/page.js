@@ -16,46 +16,46 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const stickyElement = useRef(null);
 
-  useEffect(() => {
-    // Initialize Lenis
-    const lenis = new Lenis();
-    
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+useEffect(() => {
+  // Initialize Lenis
+  const lenis = new Lenis();
+  
+  function raf(time) {
+    lenis.raf(time);
     requestAnimationFrame(raf);
-
-    // Fetch articles
-    const fetchArticles = async () => {
-      try {
-        const query = `*[_type == "article"] | order(publishedAt desc) {
-          _id,
-          title,
-          slug,
-          publishedAt,
-          mainImage {
-            asset->,
-            alt
-          }
-        }`;
-        const data = await client.fetch(query);
-        setArticles(data);
-        console.log("articles:", articles)
-      } catch (error) {
-        console.error('Error fetching articles:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchArticles();
-
-    return () => {
-      // Cleanup Lenis
-      lenis.destroy();
-    };
-  }, [articles]);
+  }
+  requestAnimationFrame(raf);
+ 
+  // Fetch articles
+  const fetchArticles = async () => {
+    try {
+      const query = `*[_type == "article"] | order(publishedAt desc) {
+        _id,
+        title,
+        slug,
+        publishedAt,
+        mainImage {
+          asset->,
+          alt
+        }
+      }`;
+      const data = await client.fetch(query);
+      setArticles(data);
+      console.log("Fetched articles data:", data); // Log the data directly
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+ 
+  fetchArticles();
+ 
+  return () => {
+    // Cleanup Lenis
+    lenis.destroy();
+  };
+}, []);
 
   if (isLoading) {
     return <div>Loading....</div>; // Or a loading spinner
